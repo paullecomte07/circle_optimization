@@ -24,8 +24,8 @@ def init_circles(n):
     x = 0
     y = 0
     for i in range(n):
-        x = (i%carre_sup)*r+r
-        y = (i//carre_sup)*r+r
+        x = (i%carre_sup)*2*r+r
+        y = (i//carre_sup)*2*r+r
         matrice.append(Cercle(x, y, r))
     return matrice, r
 
@@ -33,8 +33,17 @@ def init_circles(n):
 if __name__ == '__main__':
 
     matrice, r = init_circles(int(sys.argv[1]))
-    print(matrice)
+
+    plt.figure(figsize=[5, 5])
+    ax = plt.axes([0.1, 0.1, 0.8, 0.8], xlim=(0, 1), ylim=(0, 1))
+    points_whole_ax = 5 * 0.8 * 72    # 1 point = dpi / 72 pixels
+
     for point in matrice:
-        print(point.x)
-        plt.scatter(point.x, point.y,s=r**2)
+
+        # this lines comes from the stackoverflow thread :
+        # https://stackoverflow.com/questions/33094509/correct-sizing-of-markers-in-scatter-plot-to-a-radius-r-in-matplotlib
+
+        points_radius = 2 * r / 1.0 * points_whole_ax
+        ax.scatter(point.x, point.y, s=points_radius**2, color='r')
+    plt.grid()
     plt.show()
