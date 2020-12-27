@@ -12,8 +12,10 @@ def init_circles(n):
         n : le nombre de boules dans le a caser
 
     """
-
-    carre_sup = int(n**0.5+1)
+    if int(n**0.5) == n**0.5:
+        carre_sup = n**0.5
+    else:
+        carre_sup = int(n**0.5+1)
     # le nombre de cercle que l'on peut placer au max
     n_max = carre_sup**2
     # le rayon de chaque cercle
