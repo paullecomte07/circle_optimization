@@ -23,20 +23,18 @@ def init_circles(n):
     # coordonnées du point en cours de placement
     x = 0
     y = 0
-    for i in range(n_max):
-        x = x+i*2+r
-        if x%carre_sup == 0:
-            y = y+j*2+r
-
-            matrice.append(Cercle(x, y, r))
-    return matrice
+    for i in range(n):
+        x = (i%carre_sup)*r+r
+        y = (i//carre_sup)*r+r
+        matrice.append(Cercle(x, y, r))
+    return matrice, r
 
 
 if __name__ == '__main__':
 
-    matrice = init_circles(int(sys.argv[1]))
+    matrice, r = init_circles(int(sys.argv[1]))
     print(matrice)
     for point in matrice:
         print(point.x)
-        plt.scatter(point.x, point.y)
+        plt.scatter(point.x, point.y,s=r**2)
     plt.show()
