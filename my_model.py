@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+"""Modélisation du problème avec pyomo
+   Définition de la fonction à maximiser et des contraintes"""
+
 import pyomo.environ as pe
 
 def CirclePacking(size):

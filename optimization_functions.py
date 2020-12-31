@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-""" taken from GlobalOptimizationTest.py"""
+"""Ce fichier rassemble les algorithmes d'optimisation que nous utilisons pour répondre au problème
+   Certaines fonctions nous ont été données par Mme Bernardetta"""
 
 import pyomo.environ as pe
 from pyomo.opt import SolverFactory
@@ -66,9 +67,7 @@ def multistart(mymodel, iter, gen_multi, localsolver, labels,
 
 
 
-""" written for the exercise """
-
-""" we choose those points to start for now"""
+""" Nous utilisons ces cercles comme point de départ pour l'instant"""
 def init_points(model, init_circles):
     (matrice,r) = init_circles
     model.r = r
@@ -108,28 +107,4 @@ def monotonic_basin_hopping(mymodel, iter, init_values, localsolver, labels, log
     printPointFromModel(mymodel)
             
     return True
-                
-                
-"""
-         else:
-            print(algo_name+" Iteration ", it, "No feasible solution", file = logfile)
-
-    if feasible == True:
-        print(algo_name + " Best record found  {0:8.4f}".format(best_obj))
-        LoadPoint(mymodel, bestpoint)
-        printPointFromModel(mymodel)
-    else:
-        print(algo_name + " No feasible solution found by local solver")
-        
-    print(algo_name + " Total number of feasible solutions ", nb_solution)
-
-    return feasible
-
-"""
-        
-        
-        
-        
-        
-        
-        
+ 
