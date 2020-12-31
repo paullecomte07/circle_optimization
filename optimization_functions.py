@@ -68,21 +68,31 @@ def multistart(mymodel, iter, gen_multi, localsolver, labels,
 
 """ written for the exercise """
 
-def monotonic_basin_hopping(mymodel, iter, gen_multi, lovalsolver, labels, logfile = None, epsilon = 10**-4):
+""" we choose those points to start for now"""
+def init_points(model, init_circles):
+    (matrice,r) = init_circles
+    model.r = r
+    i=0
+    for point in matrice:
+        model.x[i] = point.x
+        model.y[i] = point.y
+        i=i+1
+
+def monotonic_basin_hopping(mymodel, iter, init_values, localsolver, labels, logfile = None, epsilon = 10**-4):
     
     algo_name = "MBH:"
     bestpoint = {}
     best_obj = sys.float_info.max
-    nb_solution = 0
-    feasible = False
     it = 0
+    init_points(mymodel, init_values)
     
     while it < iter+1 :
         #best_obj = Locally_generate(obj)
         #best_obj = L(best_obj)
+        localsolver.solve(mymodel, load_solutions=True)
+        obj = mymodel.obj()
+        
         print(algo_name + " Iteration ", it, " current value ", obj, end = '', file = logfile)
-        
-        
         if obj < best_obj - epsilon:
             best_obj = obj
             print(" *" , file = logfile)
@@ -93,7 +103,11 @@ def monotonic_basin_hopping(mymodel, iter, gen_multi, lovalsolver, labels, logfi
             print(file = logfile)
             it = it + 1
             
-    return feasible 
+    print(algo_name +" Best record found  {0:8.4f}".format(best_obj))
+    LoadPoint(mymodel, bestpoint)
+    printPointFromModel(mymodel)
+            
+    return True
                 
                 
 """

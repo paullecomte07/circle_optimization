@@ -18,11 +18,11 @@ def CirclePacking(size):
     # mais on cherche max r ce qui revient à chercher min -r
     model.obj = pe.Objective(expr = - model.r ) 
     
-    def constraint_rule(m,i,j):
+    def constraint_rule(m,i):
         # return the expression for the constraint for i and j if i != j
-        return ( (m.x[i] - m.x[j])^2 + (m.y[i] - m.y[j])^2 for j in m.J if j != i ) >= m.r^2
+        return ((m.x[i] - m.x[j])**2 + (m.y[i] - m.y[j])**2 for j in m.J if j != i ) >= (m.r)**2
     
-    model.constraint = pe.Constraint(model.I, rule = constraint_rule ) 
+    model.constraint = pe.Constraint(model.I, rule = constraint_rule) 
     
     model.n = size
     

@@ -18,7 +18,8 @@ Multi_n_iter = n*100
 
 localsolver = create_solver('minos')
 
-gen_multi = init_circles(n) # c'est l'idée mais le format renvoyé ne convient pas
+
+init_values = init_circles(n)
 
 #random_point dans multistart qu'on remplacera directement sans passer par gen_multi ?
 
@@ -27,7 +28,7 @@ labels = generate_cuid_names(mymodel)
 logfile = open("myLog.txt", 'w')
 
 tech_time = time.process_time()
-FoundSolution = multistart(mymodel, Multi_n_iter, gen_multi, localsolver, labels, logfile)
+FoundSolution = monotonic_basin_hopping(mymodel, Multi_n_iter, init_values , localsolver, labels, logfile)
 multistart_time = time.process_time()
 
 print("\n--------------\nLoading... ", tech_time)
