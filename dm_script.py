@@ -7,15 +7,16 @@ from optimization_functions import *
 from display_circle import init_circles
 from my_model import CirclePacking
 from pyomo.core.base.block import generate_cuid_names
+import time
 
 # Nombre de cercles contenus dans le carré
-n = 2 
+n = 3 
 
 # Modélisation du problème avec pyomo
 mymodel = CirclePacking(n)
 
 # Nombre max d'itérations
-Multi_n_iter = n*100
+max_iter = n*100
 
 # Appel d'un local solver
 localsolver = create_solver('minos')
@@ -30,8 +31,8 @@ logfile = open("myLog.txt", 'w')
 
 # Execution de la méthode d'optimisation MBH avec mesure du temps d'execution
 tech_time = time.process_time()
-FoundSolution = monotonic_basin_hopping(mymodel, Multi_n_iter, init_values , localsolver, labels, logfile)
-multistart_time = time.process_time()
+FoundSolution = monotonic_basin_hopping(mymodel, max_iter, init_values , localsolver, labels, logfile)
+mbh_time = time.process_time()
 
 print("\n--------------\nLoading... ", tech_time)
-print("Multistart ", multistart_time - tech_time)
+print("MBH ", mbh_time - tech_time)

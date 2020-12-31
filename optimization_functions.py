@@ -71,7 +71,7 @@ def multistart(mymodel, iter, gen_multi, localsolver, labels,
 def init_points(model, init_circles):
     (matrice,r) = init_circles
     model.r = r
-    i=0
+    i=1
     for point in matrice:
         model.x[i] = point.x
         model.y[i] = point.y
