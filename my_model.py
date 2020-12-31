@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Dec 29 12:34:53 2020
-
-@author: caro9
-"""
 
 import pyomo.environ as pe
 

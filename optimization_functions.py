@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Dec 29 11:23:02 2020
 
-@author: caro9
-"""
-
+""" taken from GlobalOptimizationTest.py"""
 
 import pyomo.environ as pe
 from pyomo.opt import SolverFactory
@@ -29,6 +25,48 @@ def check_if_optimal(results):
 def random_point(model, gen_multi):
     for i in model.N:
         model.x[i] = gen_multi.uniform(model.lb, model.ub)
+        
+def multistart(mymodel, iter, gen_multi, localsolver, labels,
+               logfile = None, epsilon = 10**-4):
+
+    algo_name = "Multi:"
+    bestpoint = {}
+    best_obj = sys.float_info.max
+    nb_solution = 0
+    feasible = False
+
+    for it in range(1,iter+1):
+        random_point(mymodel, gen_multi)
+        results = localsolver.solve(mymodel, load_solutions=True)
+        if check_if_optimal(results):
+            nb_solution += 1
+            obj = mymodel.obj()
+            feasible = True
+            print(algo_name + " Iteration ", it, " current value ", obj, end = '', file = logfile)
+            if obj  < best_obj - epsilon: 
+                best_obj = obj
+                print(" *" , file = logfile)
+                printPointFromModel(mymodel, logfile)
+                StorePoint(mymodel, bestpoint, labels)
+            else:
+                print(file = logfile)
+        else:
+            print(algo_name+" Iteration ", it, "No feasible solution", file = logfile)
+
+    if feasible == True:
+        print(algo_name + " Best record found  {0:8.4f}".format(best_obj))
+        LoadPoint(mymodel, bestpoint)
+        printPointFromModel(mymodel)
+    else:
+        print(algo_name + " No feasible solution found by local solver")
+        
+    print(algo_name + " Total number of feasible solutions ", nb_solution)
+
+    return feasible
+
+
+
+""" written for the exercise """
 
 def monotonic_basin_hopping(mymodel, iter, gen_multi, lovalsolver, labels, logfile = None, epsilon = 10**-4):
     
@@ -54,6 +92,8 @@ def monotonic_basin_hopping(mymodel, iter, gen_multi, lovalsolver, labels, logfi
         else:
             print(file = logfile)
             it = it + 1
+            
+    return feasible 
                 
                 
 """
