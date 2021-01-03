@@ -6,6 +6,8 @@
 import pyomo.environ as pe
 from pyomo.opt import SolverFactory
 from pyomo.opt import SolverStatus, TerminationCondition
+from cercle import Cercle
+from display_circle import display_circles
 import os, sys
 
 sys.path.insert(0,os.path.abspath(os.path.join(os.path.abspath(''),'../utilities')))
@@ -77,6 +79,18 @@ def init_points(model, init_circles):
         model.y[i] = point.y
         i=i+1
 
+def from_pyomo_model_to_class(model):
+    """
+    Convert pyomo model points to instance of Cercle class in order to work easily with it
+    """
+    matrice = []
+    for i in range(1,len(model.x)+1):
+       matrice.append(Cercle(model.x[i].value, model.y[i].value, model.r.value))
+    return matrice, model.r.value
+
+
+
+
 def monotonic_basin_hopping(mymodel, iter_max, init_values, localsolver, labels, logfile = None, epsilon = 10**-4):
 
     algo_name = "MBH:"
@@ -105,5 +119,6 @@ def monotonic_basin_hopping(mymodel, iter_max, init_values, localsolver, labels,
     print(algo_name +" Best record found  {0:8.4f}".format(best_obj))
     LoadPoint(mymodel, bestpoint)
     printPointFromModel(mymodel)
-
+    matrice, r = from_pyomo_model_to_class(mymodel)
+    display_circles(matrice, r)
     return True
