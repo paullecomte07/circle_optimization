@@ -10,7 +10,7 @@ from pyomo.core.base.block import generate_cuid_names
 import time
 
 # Nombre de cercles contenus dans le carré
-n = 6
+n = 4
 
 # Modélisation du problème avec pyomo
 mymodel = SpherePacking(n)
@@ -31,7 +31,7 @@ logfile = open("myLog.txt", 'w')
 
 # Execution de la méthode d'optimisation MBH avec mesure du temps d'execution
 tech_time = time.process_time()
-FoundSolution = monotonic_basin_hopping(mymodel, max_iter, init_values , localsolver, labels, logfile, True)
+FoundSolution = monotonic_basin_hopping(mymodel, max_iter, init_values , localsolver, labels, logfile, is3D = True)
 mbh_time = time.process_time()
 
 print("\n--------------\nLoading... ", tech_time, "s")
