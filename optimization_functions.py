@@ -6,7 +6,7 @@
 import pyomo.environ as pe
 from pyomo.opt import SolverFactory
 from pyomo.opt import SolverStatus, TerminationCondition
-import os, sys
+import os, sys, random
 
 sys.path.insert(0,os.path.abspath(os.path.join(os.path.abspath(''),'../utilities')))
 
@@ -77,6 +77,12 @@ def init_points(model, init_circles):
         model.y[i] = point.y
         i=i+1
 
+def perturbate_points(model):
+    delta = 0.3
+    for i in range (1,model.n +1) :
+        model.x[i] = pe.value(model.x[i]) + random.uniform(-delta, delta)
+        model.y[i] = pe.value(model.y[i]) + random.uniform(-delta, delta)
+
 def monotonic_basin_hopping(mymodel, iter_max, init_values, localsolver, labels, logfile = None, epsilon = 10**-4):
 
     algo_name = "MBH:"
@@ -86,8 +92,7 @@ def monotonic_basin_hopping(mymodel, iter_max, init_values, localsolver, labels,
     init_points(mymodel, init_values)
 
     while nb_iter < iter_max+1 :
-        #best_obj = Locally_generate(obj)
-        #best_obj = L(best_obj)
+        perturbate_points(mymodel)
         localsolver.solve(mymodel, load_solutions=True)
         obj = mymodel.obj()
 
