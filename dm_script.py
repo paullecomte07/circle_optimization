@@ -10,16 +10,16 @@ from pyomo.core.base.block import generate_cuid_names
 import time
 
 # Nombre de cercles contenus dans le carré
-n = 3
+n = 23
 
 # Modélisation du problème avec pyomo
 mymodel = CirclePacking(n)
 
 # Nombre max d'itérations
-max_iter = n*100
+max_iter = n*10
 
 # Appel d'un local solver
-localsolver = create_solver('minos')
+localsolver = create_solver('knitro')
 
 # On génère un premier ensemble de centres et un rayon pour commencer l'optimisation
 init_values = init_circles(n)
