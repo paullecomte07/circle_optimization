@@ -13,7 +13,7 @@ def init_circles(n):
 
     """
     # Disjonction de cas suivant si le chiffre est un carré parfait ou non
-    
+
     if int(n**0.5) == n**0.5:
         carre_sup = n**0.5
     else:
@@ -35,10 +35,11 @@ def init_circles(n):
     return matrice, r
 
 
-if __name__ == '__main__':
+def init_circles_random():
 
-    matrice, r = init_circles(int(sys.argv[1]))
+    return matrice, r
 
+def display_circles(matrice, r):
     plt.figure(figsize=[5, 5])
     ax = plt.axes([0.1, 0.1, 0.8, 0.8], xlim=(0, 1), ylim=(0, 1))
     points_whole_ax = 5 * 0.8 * 72    # 1 point = dpi / 72 pixels
@@ -52,3 +53,8 @@ if __name__ == '__main__':
         ax.scatter(point.x, point.y, s=points_radius**2, color='r')
     plt.grid()
     plt.show()
+
+if __name__ == '__main__':
+
+    matrice, r = init_circles(int(sys.argv[1]))
+    display_circles(matrice, r)

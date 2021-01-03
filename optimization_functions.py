@@ -26,7 +26,7 @@ def check_if_optimal(results):
 def random_point(model, gen_multi):
     for i in model.N:
         model.x[i] = gen_multi.uniform(model.lb, model.ub)
-        
+
 def multistart(mymodel, iter, gen_multi, localsolver, labels,
                logfile = None, epsilon = 10**-4):
 
@@ -44,7 +44,7 @@ def multistart(mymodel, iter, gen_multi, localsolver, labels,
             obj = mymodel.obj()
             feasible = True
             print(algo_name + " Iteration ", it, " current value ", obj, end = '', file = logfile)
-            if obj  < best_obj - epsilon: 
+            if obj  < best_obj - epsilon:
                 best_obj = obj
                 print(" *" , file = logfile)
                 printPointFromModel(mymodel, logfile)
@@ -60,7 +60,7 @@ def multistart(mymodel, iter, gen_multi, localsolver, labels,
         printPointFromModel(mymodel)
     else:
         print(algo_name + " No feasible solution found by local solver")
-        
+
     print(algo_name + " Total number of feasible solutions ", nb_solution)
 
     return feasible
@@ -77,34 +77,33 @@ def init_points(model, init_circles):
         model.y[i] = point.y
         i=i+1
 
-def monotonic_basin_hopping(mymodel, iter, init_values, localsolver, labels, logfile = None, epsilon = 10**-4):
-    
+def monotonic_basin_hopping(mymodel, iter_max, init_values, localsolver, labels, logfile = None, epsilon = 10**-4):
+
     algo_name = "MBH:"
     bestpoint = {}
     best_obj = sys.float_info.max
-    it = 0
+    nb_iter = 0
     init_points(mymodel, init_values)
-    
-    while it < iter+1 :
+
+    while nb_iter < iter_max+1 :
         #best_obj = Locally_generate(obj)
         #best_obj = L(best_obj)
         localsolver.solve(mymodel, load_solutions=True)
         obj = mymodel.obj()
-        
-        print(algo_name + " Iteration ", it, " current value ", obj, end = '', file = logfile)
+
+        print(algo_name + " Iteration ", nb_iter, " current value ", obj, end = '', file = logfile)
         if obj < best_obj - epsilon:
             best_obj = obj
             print(" *" , file = logfile)
             printPointFromModel(mymodel, logfile)
             StorePoint(mymodel, bestpoint, labels)
-            it = 0
+            nb_iter = 0
         else:
             print(file = logfile)
-            it = it + 1
-            
+            nb_iter = nb_iter + 1
+
     print(algo_name +" Best record found  {0:8.4f}".format(best_obj))
     LoadPoint(mymodel, bestpoint)
     printPointFromModel(mymodel)
-            
+
     return True
- 
