@@ -11,6 +11,9 @@ import matplotlib.pyplot as plt
 from cercle import Cercle
 from display_circle import display_circles
 
+from sphere import Sphere
+from display_sphere import display_spheres
+
 
 import os, sys, random
 
@@ -101,7 +104,7 @@ def perturbate_points(model, is3D):
     for i in range (1,model.n +1) :
         model.x[i] = pe.value(model.x[i]) + random.uniform(-delta, delta)
         model.y[i] = pe.value(model.y[i]) + random.uniform(-delta, delta)
-        if (is3D): 
+        if (is3D):
             model.z[i] = pe.value(model.z[i]) + random.uniform(-delta, delta)
 
 def monotonic_basin_hopping(mymodel, iter_max, init_values, localsolver, labels, logfile = None, epsilon = 10**-4, is3D = False):
@@ -128,10 +131,11 @@ def monotonic_basin_hopping(mymodel, iter_max, init_values, localsolver, labels,
             printPointFromModel(mymodel, logfile)
             StorePoint(mymodel, bestpoint, labels)
             matrice, r = from_pyomo_model_to_class(mymodel)
-            if (not is3D) : 
+            print(is3D)
+            if not is3D :
                 display_circles(matrice, r)
-            #else: 
-            #    display_spheres(matrice, r)
+            else:
+                display_spheres(matrice, r)
             plt.title("Iteration number :{}".format(str(counter)))
             nb_iter = 0
 
