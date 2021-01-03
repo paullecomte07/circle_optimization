@@ -5,7 +5,7 @@
 import import_ipynb
 from optimization_functions import *
 from display_circle import init_circles, display_circles
-from my_model import CirclePacking2D
+from my_model import CirclePacking
 from pyomo.core.base.block import generate_cuid_names
 import time
 
@@ -13,7 +13,7 @@ import time
 n = 6
 
 # Modélisation du problème avec pyomo
-mymodel = CirclePacking2D(n)
+mymodel = CirclePacking(n)
 
 # Nombre max d'itérations
 max_iter = n*10

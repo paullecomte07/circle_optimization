@@ -4,8 +4,8 @@
 
 import import_ipynb
 from optimization_functions import *
-from display_circle import init_circles, display_circles
-from my_model import CirclePacking3D
+from display_sphere import init_spheres, display_spheres
+from my_model import SpherePacking
 from pyomo.core.base.block import generate_cuid_names
 import time
 
@@ -13,7 +13,7 @@ import time
 n = 6
 
 # Modélisation du problème avec pyomo
-mymodel = CirclePacking3D(n)
+mymodel = SpherePacking(n)
 
 # Nombre max d'itérations
 max_iter = n*10
@@ -22,7 +22,7 @@ max_iter = n*10
 localsolver = create_solver('knitro')
 
 # On génère un premier ensemble de centres et un rayon pour commencer l'optimisation
-init_values = init_circles(n)
+init_values = init_spheres(n)
 
 labels = generate_cuid_names(mymodel)
 
@@ -31,7 +31,7 @@ logfile = open("myLog.txt", 'w')
 
 # Execution de la méthode d'optimisation MBH avec mesure du temps d'execution
 tech_time = time.process_time()
-FoundSolution = monotonic_basin_hopping(mymodel, max_iter, init_values , localsolver, labels, logfile, is3D = True)
+FoundSolution = monotonic_basin_hopping(mymodel, max_iter, init_values , localsolver, labels, logfile, True)
 mbh_time = time.process_time()
 
 print("\n--------------\nLoading... ", tech_time, "s")

@@ -78,14 +78,17 @@ def multistart(mymodel, iter, gen_multi, localsolver, labels,
 
 
 """ Nous utilisons ces cercles comme point de départ pour l'instant"""
-def init_points(model, init_circles):
-    (matrice,r) = init_circles
-    model.r = r
-    i=1
-    for point in matrice:
-        model.x[i] = point.x
-        model.y[i] = point.y
-        i=i+1
+def init_points(model, init_values, is3D):
+        (matrice,r) = init_values
+        model.r = r
+        i=1
+        for point in matrice:
+            model.x[i] = point.x
+            model.y[i] = point.y
+            if (is3D):
+                model.z[i] = point.z
+            i=i+1
+                
 
 def from_pyomo_model_to_class(model):
     """
@@ -115,7 +118,7 @@ def monotonic_basin_hopping(mymodel, iter_max, init_values, localsolver, labels,
     nb_iter = 0
     #count the number of optimization task
     counter = 0
-    init_points(mymodel, init_values)
+    init_points(mymodel, init_values, is3D)
 
     while nb_iter < iter_max+1 :
 
