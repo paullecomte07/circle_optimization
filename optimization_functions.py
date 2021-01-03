@@ -7,9 +7,10 @@ import pyomo.environ as pe
 from pyomo.opt import SolverFactory
 from pyomo.opt import SolverStatus, TerminationCondition
 
+import matplotlib.pyplot as plt
 from cercle import Cercle
 from display_circle import display_circles
-import os, sys
+
 
 import os, sys, random
 
@@ -90,7 +91,7 @@ def from_pyomo_model_to_class(model):
     matrice = []
     for i in range(1,len(model.x)+1):
        matrice.append(Cercle(model.x[i].value, model.y[i].value, model.r.value))
-    return matrice, model.r.value
+    return matrice, model.r.value/2
 
 
 
@@ -108,27 +109,38 @@ def monotonic_basin_hopping(mymodel, iter_max, init_values, localsolver, labels,
     bestpoint = {}
     best_obj = sys.float_info.max
     nb_iter = 0
+    #count the number of itération
+    counter = 0
     init_points(mymodel, init_values)
 
     while nb_iter < iter_max+1 :
+        counter +=1
         perturbate_points(mymodel)
         localsolver.solve(mymodel, load_solutions=True)
         obj = mymodel.obj()
-
+        print(counter)
         print(algo_name + " Iteration ", nb_iter, " current value ", obj, end = '', file = logfile)
         if obj < best_obj - epsilon:
+
             best_obj = obj
             print(" *" , file = logfile)
             printPointFromModel(mymodel, logfile)
             StorePoint(mymodel, bestpoint, labels)
+            matrice, r = from_pyomo_model_to_class(mymodel)
+            display_circles(matrice, r)
+            plt.title("Iteration number :{}".format(str(counter)))
             nb_iter = 0
+
         else:
             print(file = logfile)
             nb_iter = nb_iter + 1
+
+
 
     print(algo_name +" Best record found  {0:8.4f}".format(best_obj))
     LoadPoint(mymodel, bestpoint)
     printPointFromModel(mymodel)
     matrice, r = from_pyomo_model_to_class(mymodel)
     display_circles(matrice, r)
+    plt.show()
     return True

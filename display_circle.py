@@ -52,9 +52,10 @@ def display_circles(matrice, r):
         points_radius = 2 * r / 1.0 * points_whole_ax
         ax.scatter(point.x, point.y, s=points_radius**2, color='r')
     plt.grid()
-    plt.show()
+    plt.draw()
 
 if __name__ == '__main__':
 
     matrice, r = init_circles(int(sys.argv[1]))
     display_circles(matrice, r)
+    plt.show()
