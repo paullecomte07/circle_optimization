@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 
-""" Ce script cherche à maximiser le rayon de n cercles enfermés dans un carré unitaire"""
+""" Ce script cherche à maximiser le rayon de n boules enfermées dans un cube unitaire"""
 
 import import_ipynb
 from optimization_functions import *
 from display_circle import init_circles, display_circles
-from my_model import CirclePacking2D
+from my_model import CirclePacking3D
 from pyomo.core.base.block import generate_cuid_names
 import time
 
 # Nombre de cercles contenus dans le carré
-n = 23
+n = 6
 
 # Modélisation du problème avec pyomo
-mymodel = CirclePacking2D(n)
+mymodel = CirclePacking3D(n)
 
 # Nombre max d'itérations
 max_iter = n*10
@@ -31,11 +31,9 @@ logfile = open("myLog.txt", 'w')
 
 # Execution de la méthode d'optimisation MBH avec mesure du temps d'execution
 tech_time = time.process_time()
-FoundSolution = monotonic_basin_hopping(mymodel, max_iter, init_values , localsolver, labels, logfile)
+FoundSolution = monotonic_basin_hopping(mymodel, max_iter, init_values , localsolver, labels, logfile, True)
 mbh_time = time.process_time()
 
 print("\n--------------\nLoading... ", tech_time, "s")
 print("MBH ", mbh_time - tech_time, "s")
-
-
 

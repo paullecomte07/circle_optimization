@@ -10,7 +10,7 @@ from pyomo.core.base.block import generate_cuid_names
 import time
 
 # Nombre de cercles contenus dans le carré
-n = 23
+n = 6
 
 # Modélisation du problème avec pyomo
 mymodel = CirclePacking2D(n)
