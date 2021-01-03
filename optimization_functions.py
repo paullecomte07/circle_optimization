@@ -96,9 +96,6 @@ def from_pyomo_model_to_class(model):
        matrice.append(Cercle(model.x[i].value, model.y[i].value, model.r.value))
     return matrice, model.r.value
 
-
-
-
 def perturbate_points(model, is3D):
     delta = 0.3
     for i in range (1,model.n +1) :
