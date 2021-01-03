@@ -5,6 +5,7 @@
 
 import pyomo.environ as pe
 
+
 def CirclePacking(size):
     
     model = pe.AbstractModel()
@@ -24,7 +25,7 @@ def CirclePacking(size):
     def xyrconstraint_rule(m,i,j):
         # return the expression for the constraint for i and j if i != j
         if i!=j :
-            return ((m.x[i] - m.x[j])**2 + (m.y[i] - m.y[j])**2) >= (m.r)**2
+            return ((m.x[i] - m.x[j])**2 + (m.y[i] - m.y[j])**2) >= (2*m.r)**2
         else :
             return pe.Constraint.Skip
     
