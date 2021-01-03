@@ -23,6 +23,8 @@ localsolver = create_solver('knitro')
 
 # On génère un premier ensemble de centres et un rayon pour commencer l'optimisation
 init_values = init_circles(n)
+#init_values = init_circles_random(n)
+
 
 labels = generate_cuid_names(mymodel)
 

@@ -3,7 +3,7 @@ import sys
 from sphere import Sphere
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
-
+from random import random
 
 def init_spheres(n):
     """
@@ -45,8 +45,14 @@ def init_spheres(n):
     return matrice, r
 
 
-def init_spheres_random():
-
+def init_spheres_random(n):
+    r = 0
+    matrice = []
+    for i in range(n):
+        x = random()
+        y = random()
+        z = random()
+        matrice.append(Sphere(x, y, z, r))
     return matrice, r
 
 def display_spheres(matrice, r):

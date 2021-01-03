@@ -2,7 +2,7 @@ import sys
 
 from cercle import Cercle
 import matplotlib.pyplot as plt
-
+from random import random
 
 def init_circles(n):
     """
@@ -35,8 +35,13 @@ def init_circles(n):
     return matrice, r
 
 
-def init_circles_random():
-
+def init_circles_random(n):
+    r=0
+    matrice = []
+    for i in range(n):
+        x = random()
+        y = random()
+        matrice.append(Cercle(x, y, r))
     return matrice, r
 
 def display_circles(matrice, r):
@@ -56,6 +61,6 @@ def display_circles(matrice, r):
 
 if __name__ == '__main__':
 
-    matrice, r = init_circles(int(sys.argv[1]))
+    matrice, r = init_circles_random(int(sys.argv[1]))
     display_circles(matrice, r)
     plt.show()

@@ -4,7 +4,7 @@
 
 import import_ipynb
 from optimization_functions import *
-from display_circle import init_circles, display_circles
+from display_circle import init_circles, display_circles, init_circles_random
 from my_model import CirclePacking2D
 from pyomo.core.base.block import generate_cuid_names
 import time
@@ -22,7 +22,8 @@ max_iter = n*10
 localsolver = create_solver('knitro')
 
 # On génère un premier ensemble de centres et un rayon pour commencer l'optimisation
-init_values = init_circles(n)
+#init_values = init_circles(n)
+init_values = init_circles_random(n)
 
 labels = generate_cuid_names(mymodel)
 
@@ -36,6 +37,3 @@ mbh_time = time.process_time()
 
 print("\n--------------\nLoading... ", tech_time, "s")
 print("MBH ", mbh_time - tech_time, "s")
-
-
-
