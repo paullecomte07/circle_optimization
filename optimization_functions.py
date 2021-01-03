@@ -96,14 +96,15 @@ def from_pyomo_model_to_class(model):
 
 
 
-def perturbate_points(model):
+def perturbate_points(model, is3D):
     delta = 0.3
     for i in range (1,model.n +1) :
         model.x[i] = pe.value(model.x[i]) + random.uniform(-delta, delta)
         model.y[i] = pe.value(model.y[i]) + random.uniform(-delta, delta)
+        if (is3D): 
+            model.z[i] = pe.value(model.z[i]) + random.uniform(-delta, delta)
 
-
-def monotonic_basin_hopping(mymodel, iter_max, init_values, localsolver, labels, logfile = None, epsilon = 10**-4):
+def monotonic_basin_hopping(mymodel, iter_max, init_values, localsolver, labels, logfile = None, epsilon = 10**-4, is3D = False):
 
     algo_name = "MBH:"
     bestpoint = {}
@@ -115,7 +116,7 @@ def monotonic_basin_hopping(mymodel, iter_max, init_values, localsolver, labels,
 
     while nb_iter < iter_max+1 :
 
-        perturbate_points(mymodel)
+        perturbate_points(mymodel, is3D)
         localsolver.solve(mymodel, load_solutions=True)
         obj = mymodel.obj()
 
@@ -127,7 +128,10 @@ def monotonic_basin_hopping(mymodel, iter_max, init_values, localsolver, labels,
             printPointFromModel(mymodel, logfile)
             StorePoint(mymodel, bestpoint, labels)
             matrice, r = from_pyomo_model_to_class(mymodel)
-            display_circles(matrice, r)
+            if (not is3D) : 
+                display_circles(matrice, r)
+            #else: 
+            #    display_spheres(matrice, r)
             plt.title("Iteration number :{}".format(str(counter)))
             nb_iter = 0
 
