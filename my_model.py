@@ -6,7 +6,7 @@
 import pyomo.environ as pe
 
 
-def CirclePacking2D(size):
+def CirclePacking(size):
     
     model = pe.AbstractModel()
     model.n = pe.Param(within=pe.NonNegativeIntegers)
@@ -56,7 +56,7 @@ def CirclePacking2D(size):
     
     return model.create_instance()
 
-def CirclePacking3D(size):
+def SpherePacking(size):
     
     model = pe.AbstractModel()
     model.n = pe.Param(within=pe.NonNegativeIntegers)

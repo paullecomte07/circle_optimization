@@ -78,22 +78,29 @@ def multistart(mymodel, iter, gen_multi, localsolver, labels,
 
 
 """ Nous utilisons ces cercles comme point de départ pour l'instant"""
-def init_points(model, init_circles):
-    (matrice,r) = init_circles
-    model.r = r
-    i=1
-    for point in matrice:
-        model.x[i] = point.x
-        model.y[i] = point.y
-        i=i+1
+def init_points(model, init_values, is3D):
+        (matrice,r) = init_values
+        model.r = r
+        i=1
+        for point in matrice:
+            model.x[i] = point.x
+            model.y[i] = point.y
+            if (is3D):
+                print("test")
+                model.z[i] = point.z
+            i=i+1
+                
 
-def from_pyomo_model_to_class(model):
+def from_pyomo_model_to_class(model, is3D):
     """
     Convert pyomo model points to instance of Cercle class in order to work easily with it
     """
     matrice = []
     for i in range(1,len(model.x)+1):
-       matrice.append(Cercle(model.x[i].value, model.y[i].value, model.r.value))
+        if (is3D) :
+            matrice.append(Sphere(model.x[i].value, model.y[i].value, model.z[i].value, model.r.value))
+        else :
+            matrice.append(Cercle(model.x[i].value, model.y[i].value, model.r.value))
     return matrice, model.r.value
 
 def perturbate_points(model, is3D):
@@ -112,7 +119,7 @@ def monotonic_basin_hopping(mymodel, iter_max, init_values, localsolver, labels,
     nb_iter = 0
     #count the number of optimization task
     counter = 0
-    init_points(mymodel, init_values)
+    init_points(mymodel, init_values, is3D)
 
     while nb_iter < iter_max+1 :
 
@@ -127,13 +134,12 @@ def monotonic_basin_hopping(mymodel, iter_max, init_values, localsolver, labels,
             print(" *" , file = logfile)
             printPointFromModel(mymodel, logfile)
             StorePoint(mymodel, bestpoint, labels)
-            matrice, r = from_pyomo_model_to_class(mymodel)
-            print(is3D)
+            matrice, r = from_pyomo_model_to_class(mymodel, is3D)
             if not is3D :
                 display_circles(matrice, r)
             else:
                 display_spheres(matrice, r)
-            plt.title("Iteration number :{}".format(str(counter)))
+            #plt.title("Iteration number :{}".format(str(counter)))
             nb_iter = 0
 
         else:
