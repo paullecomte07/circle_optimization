@@ -6,14 +6,14 @@ import import_ipynb
 from optimization_functions import *
 
 from display_circle import init_circles, display_circles, init_circles_random
-from my_model import CirclePacking2D
+from my_model import CirclePacking
 
 
 from pyomo.core.base.block import generate_cuid_names
 import time
 
 # Nombre de cercles contenus dans le carré
-n = 6
+n = 5
 
 # Modélisation du problème avec pyomo
 mymodel = CirclePacking(n)
@@ -32,10 +32,22 @@ labels = generate_cuid_names(mymodel)
 
 # Création d'un fichier qui contiendra les logs
 logfile = open("myLog.txt", 'w')
-
+"""
 # Execution de la méthode d'optimisation MBH avec mesure du temps d'execution
 tech_time = time.process_time()
 FoundSolution = monotonic_basin_hopping(mymodel, max_iter, init_values , localsolver, labels, logfile)
+mbh_time = time.process_time()
+
+print("\n--------------\nLoading... ", tech_time, "s")
+print("MBH ", mbh_time - tech_time, "s")
+"""
+
+
+init_values = init_circles_random(n)
+
+# Execution de la méthode d'optimisation Multistart avec mesure du temps d'execution
+tech_time = time.process_time()
+FoundSolution = multistart(mymodel, max_iter, init_values , localsolver, labels, logfile)
 mbh_time = time.process_time()
 
 print("\n--------------\nLoading... ", tech_time, "s")
