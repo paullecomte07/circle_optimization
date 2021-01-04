@@ -10,7 +10,7 @@ from pyomo.core.base.block import generate_cuid_names
 import time
 
 # Nombre de cercles contenus dans le carré
-n = 4
+n = 17
 
 # Modélisation du problème avec pyomo
 mymodel = SpherePacking(n)
@@ -22,11 +22,6 @@ max_iter = n*10
 localsolver = create_solver('knitro')
 
 # On génère un premier ensemble de centres et un rayon pour commencer l'optimisation
-
-init_values = init_circles(n)
-#init_values = init_circles_random(n)
-
-
 init_values = init_spheres(n)
 
 
