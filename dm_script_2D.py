@@ -32,7 +32,8 @@ labels = generate_cuid_names(mymodel)
 
 # Création d'un fichier qui contiendra les logs
 logfile = open("myLog.txt", 'w')
-"""
+
+
 # Execution de la méthode d'optimisation MBH avec mesure du temps d'execution
 tech_time = time.process_time()
 FoundSolution = monotonic_basin_hopping(mymodel, max_iter, init_values , localsolver, labels, logfile)
@@ -40,15 +41,16 @@ mbh_time = time.process_time()
 
 print("\n--------------\nLoading... ", tech_time, "s")
 print("MBH ", mbh_time - tech_time, "s")
+
 """
-
-
 init_values = init_circles_random(n)
 
 # Execution de la méthode d'optimisation Multistart avec mesure du temps d'execution
 tech_time = time.process_time()
 FoundSolution = multistart(mymodel, max_iter, init_values , localsolver, labels, logfile)
-mbh_time = time.process_time()
+multistart_time = time.process_time()
 
 print("\n--------------\nLoading... ", tech_time, "s")
-print("MBH ", mbh_time - tech_time, "s")
+print("Multistart ", multistart_time - tech_time, "s")
+
+"""
