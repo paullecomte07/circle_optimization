@@ -49,9 +49,12 @@ Il s'avère que partir d'un configuration où les boules ont déjà un rayon ass
 
 **optimization_functions.py** contient le code des différents algorithmes d'optimisation.
 
-
-
 ## Choix du solveur local
+
+Pour ce qui est du choix solveur local, nous avons fait plusieurs séries de test dont vous trouverez un aperçu ci-dessous, à temps égaux et pour différents n:
+<br/>![](/images/comparaison_solveurs.png)
+
+Il est finalement difficile de trancher, l'efficacité du solveur semblant varier avec n. Mais on remarque également avec d'autres tests que si l'on augmente le temps d'execution, la tendance peut s'inverser. D'autre part, le solveur minos renvoyait de nombreux warnings pour un grand nombre d'itération, on s'est donc davatange intéressé à snopt et knitro. 
 
 ## Choix de la perturbation
 
