@@ -19,7 +19,7 @@ n = 44
 mymodel = CirclePacking(n)
 
 # Nombre max d'itérations
-max_iter = n*10
+max_iter = n*100
 
 # Appel d'un local solver
 localsolver = create_solver('snopt')
@@ -51,11 +51,7 @@ FoundSolution = multistart(mymodel, max_iter, init_values , localsolver, labels,
 multistart_time = time.process_time()
 
 print("\n--------------\nLoading... ", tech_time, "s")
-<<<<<<< HEAD
-print("Multistart ", mbh_time - tech_time, "s")
-"""
-=======
+
 print("Multistart ", multistart_time - tech_time, "s")
 
 """
->>>>>>> 8db51a76a3336bacbfad187ac5eca1334114f546
