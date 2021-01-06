@@ -7,7 +7,8 @@ L'objectif de ce repository est de proposer une solution pour le problème suiva
 
 ## Définition du problème
 
-Soit *n* un nombre naturel, il s'agit de déterminer le rayon *r* maximal de *n* cercles enfermés dans un carré de côté unitaire sans que ces cercles ne se chevauchent. On représentera par (*x<sub>i</sub>*, *y<sub>i</sub>*) les coordonnées du centre du *i*-ème cercle. On peut alors écrire le problème de la manière suivante : 
+Soit *n* un nombre naturel, il s'agit de déterminer le rayon *r* maximal de *n* cercles enfermés dans un carré de côté unitaire sans que ces cercles ne se chevauchent. On représentera par (*x<sub>i</sub>*, *y<sub>i</sub>*) les coordonnées du centre du *i*-ème cercle.
+<br/>On peut alors écrire le problème de la manière suivante : 
 
 ![GitHub Logo](/images/formules_mathematiques.png)
 
