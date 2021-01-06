@@ -24,6 +24,12 @@ Ainsi le nombre de ligne et de colonne identique et seule la dernière ligne res
 => le problème avec ce placement déjà optimisé est qu'il est difficile  de changer de configuration radicalement.(alors que c'est possibble si l'on commence avec des cercles de rayon très petit).s
 Une autre possibilité pour trouver des solutions faisable est de placer des points de rayon 0, dans le domaine [0, 1]^2.
 
+## Choix du solveur local
+
+## Choix de la perturbation
+
+## Comparaison avec l'algorithme Multistart
+
 ## Conclusion
 
 Cours de la prof : aller plus loin dans le projet
