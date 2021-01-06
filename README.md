@@ -84,4 +84,4 @@ Nous avons aussi testé avec le solveur knitro et différents *n*, là encore, c
 
 Pour conclure, nous avons vu que le problème de la maximisation du rayon de n cercles identiques placés dans le carré unité était un problème mathématique plus complexe à résoudre que ce qu'il en avait l'air. Dans ce rapport, après avoir choisi un placement initial des points plus judicieux qu'un placement purement aléatoire et décidé d'une perturabtion suite à l'analyse d'essais avec MBH et Multistart, nous avons pu comparer les résultats obtenus par ces deux derniers algorithmes. Pour les deux solveurs utilisés et à temps égal, c'est donc l'algorithme MBH qui donne un rayon plus proche du rayon maximal.
 
-Enfin, pour poursuivre sur la résolution de ce problème, sont disponibles dans le répertoire les éléments de codes nécessaires à la résolution de ce problème en 3 dimensions.
+Enfin, pour poursuivre sur la résolution de ce problème, sont disponibles dans le répertoire les éléments de code nécessaires à la résolution de ce problème en 3 dimensions.
