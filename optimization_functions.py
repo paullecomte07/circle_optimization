@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 
-"""Ce fichier rassemble les algorithmes d'optimisation que nous utilisons pour répondre au problème
-   Certaines fonctions nous ont été données par Mme Bernardetta"""
+"""
+
+   Ce fichier rassemble les algorithmes d'optimisation que nous utilisons pour répondre au problème
+   Certaines fonctions nous ont été données par Mme Bernardetta dans le cadre du cours d'optimisation dispensé aux Mines Nancy.
+
+"""
 
 import pyomo.environ as pe
 from pyomo.opt import SolverFactory
@@ -35,8 +39,12 @@ def check_if_optimal(results):
 
 
 
-""" Nous utilisons ces cercles comme point de départ pour l'instant"""
+
 def init_points(model, init_values, is3D):
+
+    """
+    Convert instance of Cercle class into pyomo model point
+    """
         (matrice,r) = init_values
         model.r = r
         i=1
@@ -48,6 +56,7 @@ def init_points(model, init_values, is3D):
             i=i+1
 
 def from_pyomo_model_to_class(model, is3D):
+
     """
     Convert pyomo model points to instance of Cercle class in order to work easily with it
     """
@@ -60,6 +69,11 @@ def from_pyomo_model_to_class(model, is3D):
     return matrice, model.r.value
 
 def perturbate_points(model, is3D):
+
+    """
+    This fonction is used in MBH to create the pertubation around local minimum
+    """
+
     delta = 0.15
     for i in range (1,model.n +1) :
         model.x[i] = pe.value(model.x[i]) + random.uniform(-delta, delta)
@@ -69,6 +83,9 @@ def perturbate_points(model, is3D):
 
 def monotonic_basin_hopping(mymodel, iter_max, init_values, localsolver, labels, logfile = None, epsilon = 10**-4, is3D = False):
 
+    """
+    Implement the MBH in 2D and 3D
+    """
     algo_name = "MBH:"
     bestpoint = {}
     best_obj = sys.float_info.max

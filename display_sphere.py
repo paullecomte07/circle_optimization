@@ -9,9 +9,9 @@ def init_spheres(n):
     """
 
     Description:
-        Cette fonction positionne les spheres de façon ordonnée mais pas forcément optimisée
+        Cette fonction positionne les sphàres de façon ordonnée mais pas forcément optimisée
     Args:
-        n : le nombre de boules dans le a caser
+        n : le nombre de boules à placer
 
     """
     # Disjonction de cas suivant si le chiffre est un carré parfait ou non

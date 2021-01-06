@@ -1,3 +1,10 @@
+"""
+
+Ce script définit l'objet Cercle que nous serons amenés à manipuler dans différents script comme entre autres dans display_circle.py.
+
+"""
+
+
 class Cercle():
 
     def __init__(self, x, y, r):
