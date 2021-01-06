@@ -30,8 +30,8 @@ Pour trouver ainsi un solution quelque soit n, notre démarche est la suivante:
 
 Cet algorithme nous donne pour tous les carrées parfaits la configuration où r est déjà maximal, enfin d'après l'article [14] global opitimization, on constate que on est proche de la taille moyenne des cercles en moyenne lors de l'initialisation  ou r=1.07456993182354/sqrt(n)
 
-![](images/init_circles7.png)
-![](images/init_circles9.png)
+![](/images/init_circles7.png)
+![](/images/init_circles9.png)
 
 Remarque avec ce type d'initialisation :
 
@@ -49,8 +49,18 @@ Il s'avère que partir d'un configuration où les boules ont déjà un rayon ass
 
 **optimization_functions.py** contient le code des différents algorithmes d'optimisation.
 
+### Lancer le programme & résultats attendus
 
+Pour lancer le programme, il vous suffit dans la console d'exécuter dm_script_*.py. A la fin de l'optimisation, vous aurez notamment accès au rayon des cercles et au temps d'exécution du processus. Seront afficher les représentations des points sur un graph à chaque nouvelle optimisation comme illustrées ci-dessous:
 
+#### En 2D :
+
+ ![](/images/step_by_step_optim_MBH)
+
+#### En 3D :
+
+ ![](/images/step_by_step_optim_3D.png)
+ 
 ## Choix du solveur local
 
 ## Choix de la perturbation
@@ -71,13 +81,13 @@ Ensuite, il est rassurant de voir que lorsque l'on choisit une perturbation trop
 
 ## Comparaison avec l'algorithme Multistart
 
-Nous avons par la suite comparé les résultats obtenus avec l'algorithme MBH à ceux obtenus avec l'algorithme Multistart. 
+Nous avons par la suite comparé les résultats obtenus avec l'algorithme MBH à ceux obtenus avec l'algorithme Multistart.
 
 Dans un premier temps avec le solveur snopt, vous trouverez ci-dessous les résultats obtenus pour différents n et différents temps d'execution :
 ![GitHub Logo](/images/comparaison_MBH_Multistart_snopt.png)
 
-r ref est la valeur donnée par le site Packomania pour chaque n, elle nous permet de calculer un delta relatif. 
-On remarque qu'en majorité, l'algorithme MBH est celui qui, à temps égaux, nous donne un rayon le plus proche de celui maximal. 
+r ref est la valeur donnée par le site Packomania pour chaque n, elle nous permet de calculer un delta relatif.
+On remarque qu'en majorité, l'algorithme MBH est celui qui, à temps égaux, nous donne un rayon le plus proche de celui maximal.
 
 Nous avons aussi testé avec le solveur knitro et différents n, là encore, c'est plutôt l'algorithme MBH qui donne les meilleurs résultats à temps égaux :
 <br/>![GitHub Logo](/images/comparaison_MBH_Multistart_knitro.png)
@@ -85,3 +95,12 @@ Nous avons aussi testé avec le solveur knitro et différents n, là encore, c'e
 ## Conclusion
 
 Cours de la prof : aller plus loin dans le projet
+
+
+## Bibliographie
+
+1 - Addis, B., Locatelli, M., Schoen, F.: Disk packing in a square: a new global optimization approach. INFORMS J. Comput. 20, 516–524 (2008)
+
+2 - A. Grosso, A. R. M. J. U. Jamali, M. Locatelli, and F. Schoen, “Solving the problem of packing equal and unequal circles in a circular container,” Journal of Global Optimization, vol. 47, no. 1, pp. 63–81, 2010.
+
+3 - Brian Olson, Irina Hashmi, Kevin Molloy, Amarda Shehu, "Basin Hopping as a General and Versatile Optimization Framework for the Characterization of Biological Macromolecules", Advances in Artificial Intelligence, vol. 2012, Article ID 674832, 19 pages, 2012. https://doi.org/10.1155/2012/674832

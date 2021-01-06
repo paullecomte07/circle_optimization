@@ -45,15 +45,15 @@ def init_points(model, init_values, is3D):
     """
     Convert instance of Cercle class into pyomo model point
     """
-        (matrice,r) = init_values
-        model.r = r
-        i=1
-        for point in matrice:
-            model.x[i] = point.x
-            model.y[i] = point.y
-            if (is3D):
-                model.z[i] = point.z
-            i=i+1
+    (matrice,r) = init_values
+    model.r = r
+    i=1
+    for point in matrice:
+        model.x[i] = point.x
+        model.y[i] = point.y
+        if (is3D):
+            model.z[i] = point.z
+        i=i+1
 
 def from_pyomo_model_to_class(model, is3D):
 
