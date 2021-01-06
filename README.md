@@ -21,7 +21,7 @@ Recherche historique des solutions (articles)
 ## Placement initial des points
 
 
-La façon la plus simple de positionner les points à l'état initial tout en respectant les contraintes est de générer des positions aléatoire dans [0 ,1] en prenant des rayons nuls. Cette initialisation fonctionne très bien, mais nous nous sommes tout de même posés la question suivante: l'initialisation joue-t-elle un rôle crutial dans la performance des algorithmes. Nous avons donc réfléchis à une autre manière de procéder. L'objectif est de trouver une solutions faisable pour tout n.
+La façon la plus simple de positionner les points à l'état initial tout en respectant les contraintes est de générer des positions aléatoire dans [0 ,1] en prenant des rayons nuls. Cette initialisation fonctionne très bien, mais nous nous sommes tout de même posés la question suivante: l'initialisation joue-t-elle un rôle crucial dans la performance des algorithmes. Nous avons donc réfléchis à une autre manière de procéder. L'objectif est de trouver une solutions faisable pour tout n.
 
 Pour trouver ainsi un solution quelque soit n, notre démarche est la suivante:
 - On calcule le premier carré parfait supérieur à n.
@@ -29,16 +29,26 @@ Pour trouver ainsi un solution quelque soit n, notre démarche est la suivante:
 
 Cet algorithme nous donne pour tous les carrées parfaits la configuration où r est déjà maximal, enfin d'après l'article [14] global opitimization, on constate que on est proche de la taille moyenne des cercles en moyenne lors de l'initialisation  ou r=1.07456993182354/sqrt(n)
 
-Remarque avec ce type d'initilialisation:
-Il s'avère que partir d'un configuration où les boules ont déjà un rayon assez grand ne permets pas d'améliorer radicalement le temps de calcule. Pire, il semble au vu de nos expérimentations que il soit préférable de partir de cercle de rayon 0. En effet, le problème avec ce placement étant déjà optimisé, il est difficile  de changer de configuration radicalement. C'est possibble si l'on commence avec des cercles de rayon très petit)
+![](images/init_circles7.png)
+![](images/init_circles9.png)
+
+Remarque avec ce type d'initialisation :
+
+Il s'avère que partir d'un configuration où les boules ont déjà un rayon assez grand ne permets pas d'améliorer radicalement le temps de calcule. Pire, il semble au vu de nos expérimentations que il soit préférable de partir de cercle de rayon 0. En effet, le problème avec ce placement étant déjà optimisé, il est difficile  de changer de configuration radicalement. C'est possible si l'on commence avec des cercles de rayon très petit)
 
 ## Implémentation et utilisation du code
 
 ### Description de la disposition des différents fichiers
 
-**my_model.py** contient le code qui contruit le modèle Pyomo utilisé dans l'optimisation. Il contient le modèle utile pour le problème 2D mais aussi le problème 3D.
+**dm_script_2D** contient le script à lancer pour réaliser une optimisation. A la fin, il affichera une représentation à chaque nouvelle optimisation du placement des cercles.
+
+**dm_script_3D** contient le script homologue à **dm_script_2D** mais pour le problème en 3D.
+
+**my_model.py** contient le code qui construit le modèle Pyomo utilisé dans l'optimisation. Il contient le modèle utile pour le problème 2D mais aussi le problème 3D.
 
 **optimization_functions.py** contient le code des différents algorithmes d'optimisation.
+
+
 
 ## Choix du solveur local
 
