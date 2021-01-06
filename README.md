@@ -33,4 +33,9 @@ Une autre possibilité pour trouver des solutions faisable est de placer des poi
 
 ## Conclusion
 
+En 3D (si vous souhaitez le mettre quelque part) :
+
+![GitHub Logo](/images/formules_mathematiques_3D.png)
+
+
 Cours de la prof : aller plus loin dans le projet
