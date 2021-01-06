@@ -13,7 +13,7 @@ from pyomo.core.base.block import generate_cuid_names
 import time
 
 # Nombre de cercles contenus dans le carré
-n = 5
+n = 44
 
 # Modélisation du problème avec pyomo
 mymodel = CirclePacking(n)
@@ -22,7 +22,7 @@ mymodel = CirclePacking(n)
 max_iter = n*10
 
 # Appel d'un local solver
-localsolver = create_solver('knitro')
+localsolver = create_solver('snopt')
 
 # On génère un premier ensemble de centres et un rayon pour commencer l'optimisation
 #init_values = init_circles(n)
@@ -32,7 +32,7 @@ labels = generate_cuid_names(mymodel)
 
 # Création d'un fichier qui contiendra les logs
 logfile = open("myLog.txt", 'w')
-"""
+
 # Execution de la méthode d'optimisation MBH avec mesure du temps d'execution
 tech_time = time.process_time()
 FoundSolution = monotonic_basin_hopping(mymodel, max_iter, init_values , localsolver, labels, logfile)
@@ -51,4 +51,5 @@ FoundSolution = multistart(mymodel, max_iter, init_values , localsolver, labels,
 mbh_time = time.process_time()
 
 print("\n--------------\nLoading... ", tech_time, "s")
-print("MBH ", mbh_time - tech_time, "s")
+print("Multistart ", mbh_time - tech_time, "s")
+"""
