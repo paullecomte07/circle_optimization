@@ -60,6 +60,17 @@ Ensuite, il est rassurant de voir que lorsque l'on choisit une perturbation trop
 
 ## Comparaison avec l'algorithme Multistart
 
+Nous avons par la suite comparé les résultats obtenus avec l'algorithme MBH à ceux obtenus avec l'algorithme Multistart. 
+
+Dans un premier temps avec le solveur snopt, vous trouverez ci-dessous les résultats obtenus pour différents n et différents temps d'execution :
+![GitHub Logo](/images/comparaison_MBH_Multistart_snopt.png)
+
+r ref est la valeur donnée par le site Packomania pour chaque n, elle nous permet de calculer un delta relatif. 
+On remarque qu'en majorité, l'algorithme MBH est celui qui, à temps égaux, nous donne un rayon le plus proche de celui maximal. 
+
+Nous avons aussi testé avec le solveur knitro et différents n, là encore, c'est plutôt l'algorithme MBH qui donne les meilleurs résultats à temps égaux :
+![GitHub Logo](/images/comparaison_MBH_Multistart_knitro.png)
+
 ## Conclusion
 
 Cours de la prof : aller plus loin dans le projet
