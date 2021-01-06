@@ -38,7 +38,7 @@ Il s'avère que partir d'un configuration où les boules ont déjà un rayon ass
 
 **my_model.py** contient le code qui contruit le modèle Pyomo utilisé dans l'optimisation. Il contient le modèle utile pour le problème 2D mais aussi le problème 3D.
 
-**optimization_functions.py** contient le code des différents
+**optimization_functions.py** contient le code des différents algorithmes d'optimisation.
 
 ## Choix du solveur local
 
