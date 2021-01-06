@@ -69,7 +69,7 @@ r ref est la valeur donnée par le site Packomania pour chaque n, elle nous perm
 On remarque qu'en majorité, l'algorithme MBH est celui qui, à temps égaux, nous donne un rayon le plus proche de celui maximal. 
 
 Nous avons aussi testé avec le solveur knitro et différents n, là encore, c'est plutôt l'algorithme MBH qui donne les meilleurs résultats à temps égaux :
-![GitHub Logo](/images/comparaison_MBH_Multistart_knitro.png)
+<br/>![GitHub Logo](/images/comparaison_MBH_Multistart_knitro.png)
 
 ## Conclusion
 
