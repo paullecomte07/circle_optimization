@@ -19,7 +19,7 @@ n = 44
 mymodel = CirclePacking(n)
 
 # Nombre max d'itérations
-max_iter = n*100
+max_iter = n*10
 
 # Appel d'un local solver
 localsolver = create_solver('snopt')
