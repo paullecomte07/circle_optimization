@@ -33,20 +33,24 @@ Aussi, le but est ici de proposer une stratégie de résolution de ce problème 
 ## Placement initial des points
 
 
-La façon la plus simple de positionner les points à l'état initial tout en respectant les contraintes est de générer des positions aléatoire dans [0 ,1] en prenant des rayons nuls. Cette initialisation fonctionne très bien, mais nous nous sommes tout de même posés la question suivante: l'initialisation joue-t-elle un rôle crucial dans la performance des algorithmes. Nous avons donc réfléchis à une autre manière de procéder. L'objectif est de trouver une solutions faisable pour tout n.
+La façon la plus simple de positionner les points à l'état initial tout en respectant les contraintes est de générer des positions aléatoires dans [0 ,1] en prenant des rayons nuls. Cette initialisation fonctionne très bien, mais nous nous sommes tout de même posés la question suivante: **l'initialisation joue-t-elle un rôle crucial dans la performance des algorithmes?**
+Nous avons donc réfléchis à une autre façon d'initialiser le problème tout en trouvant des solutions généralisable pour tout n.
 
-Pour trouver ainsi un solution quelque soit n, notre démarche est la suivante:
+Notre démarche est la suivante:
 - On calcule le premier carré parfait supérieur à n.
-- On calcule alors r en sachant qu'il y sqrt(n) boule à placer dans la largeur.
+- On calcule alors r en sachant qu'il y sqrt(n) boules à placer dans la largeur.
 
-Cet algorithme nous donne pour tous les carrées parfaits la configuration où r est déjà maximal, enfin d'après l'article [1.], on constate que on est proche de la taille moyenne des cercles en moyenne lors de l'initialisation  ou r=1.07456993182354/sqrt(n)
+Cet algorithme nous donne alors pour tous les carrées parfaits la configuration où r est déjà maximal. Dans les autres cas, d'après l'article [1.], on constate que l'on obtient des rayons de cercles déjà très satisfaisant, se rapprochant de la taille moyenne des rayons données dans la littérature où r=1.07456993182354/sqrt(n) environ.
 
+**Initialisation avec n=7 :**
 ![](/images/init_circle_7.png)
+
+**Initialisation avec n=9 :**
 ![](/images/init_circle_9.png)
 
 Remarque avec ce type d'initialisation :
 
-  Il s'avère que partir d'un configuration où les boules ont déjà un rayon assez grand ne permets pas d'améliorer radicalement le temps de calcule. Pire, il semble au vu de nos expérimentations que il soit préférable de partir de cercle de rayon 0. En effet, le problème avec ce placement étant déjà optimisé, il est difficile  de changer de configuration radicalement. C'est possible si l'on commence avec des cercles de rayon très petit)
+  Il s'avère que partir d'une configuration initiale où les boules ont déjà un rayon assez grand, il est difficile, voire impossible, d'obtenir de meilleurs résultats que ceux obtenus avec les cercles placés aléatoirement de rayon 0. En effet, le problème avec ce placement déjà "optimisé" est qu'il est difficile  de changer de configuration radicalement. Le cercle ce gênant entre eux dès le début.
 
 ## Implémentation et utilisation du code
 
@@ -63,7 +67,7 @@ Remarque avec ce type d'initialisation :
 
 ### Lancer le programme & résultats attendus
 
-  Pour lancer le programme, il vous suffit dans la console d'exécuter dm_script_*.py. A la fin de l'optimisation, vous aurez notamment accès au rayon des cercles et au temps d'exécution du processus. Seront afficher les représentations des points sur un graph à chaque nouvelle optimisation comme illustrées ci-dessous:
+  Pour lancer le programme, il vous suffit dans la console d'exécuter dm_script_2d.py (ou dm_script_3d.py). A la fin de l'optimisation, vous aurez accès au rayon des cercles et au temps d'exécution du processus. Seront affichées les représentations des points sur un graphique à chaque nouvelle optimisation comme illustrées ci-dessous:
 
 #### En 2D :
 
@@ -79,24 +83,25 @@ Remarque avec ce type d'initialisation :
 Pour ce qui est du choix solveur local, nous avons fait plusieurs séries de test dont vous trouverez un aperçu ci-dessous, à temps égaux et pour différents n:
 <br/>![](/images/comparaison_solveurs.png)
 
-Il est finalement difficile de trancher, l'efficacité du solveur semblant varier avec n. Mais on remarque également avec d'autres tests que si l'on augmente le temps d'execution, la tendance peut s'inverser. D'autre part, le solveur minos renvoyait de nombreux warnings pour un grand nombre d'itération, on s'est donc davatange intéressé à snopt et knitro.
+Il est finalement difficile de trancher, l'efficacité du solveur semblant varier avec n. Mais, on remarque également avec d'autres tests que si l'on augmente le temps d'execution, la tendance peut s'inverser. D'autre part, le solveur minos renvoyait de nombreux warnings pour un grand nombre d'itération, on s'est donc davatange intéressé à snopt et knitro.
 
 
 ## Choix de la perturbation
 
-Pour le choix de la perturbation, nous avons grossièrement trouvé que 0.3 fonctionnait bien. Pour les expérimentations, nous utilisons donc ce paramètre.
+Pour le choix de la perturbation, nous avons grossièrement trouvé que **0.3** fonctionnait bien. Pour les expérimentations, nous utilisons donc ce paramètre.
 Toutefois, nous nous sommes résolus à réaliser de nombreux tests afin d'en déduire la perturbation optimale. Nous avons donc réalisé 18 mesures pour n=44 et pour des perturbations différentes.
 
-En bleu, vous avez la courbe pour l'algorithme MBH (localsolver: snopt, initialisation: random).
-En orange, vous avez la courbe pour l'algorithme multistart (localsolver: snopt, initialisation: random) dont le résultat ne dépend bien évidemment pas de la perturbation. Ce resultat est la moyenne de 5 valeurs trouvée pour n=44.
+En bleu, vous avez les différentes mesures pour l'algorithme MBH (localsolver: snopt, initialisation: random).
+En orange, vous avez la droite indicative pour l'algorithme multistart (localsolver: snopt, initialisation: random) dont le résultat ne dépend bien évidemment pas de la perturbation. Ce resultat est la moyenne de 5 valeurs trouvée pour n=44.
 
 ![](/perturbation.png)
 
+∆relatif correspond à la différence relative entre le rayon trouvé expérimentalement et le rayon fournit par le site Packomania.com
 Plusieurs remarques sont à faire au vu de ce graphique.
 
-Tout d'abord, on constate que la valeur de la perturbation est non négligeable sur la valeur des rayons obtenus. Etant conscient qu'il nous manque des valeurs pour pouvoir interpoler fiablement les données sur un courbe, nous pouvons penser qu'il pouvons penser que la perturbation optimale se situe dans [0.1, 0.35].
+Tout d'abord, on constate que la valeur de la perturbation est non négligeable sur la valeur des rayons obtenue. Etant conscient qu'il nous manque des valeurs pour pouvoir interpoler fiablement les données sur une courbe, nous pouvons penser que la perturbation optimale se situe dans [0.1, 0.35].
 
-Ensuite, il est rassurant de voir que lorsque l'on choisit une perturbation trop grande nous retrouvons des valeurs de r qui se rapproche de celle du multistart. En effet, lorsque les perturbations sont bien plus grandes que les rayons des cercles, à chaque itération du MBH tout se passe comme nous mélangions de façon complétement aléatoire tous les cercles, ce qui revient au multistart.
+Ensuite, il est rassurant de voir que lorsque l'on choisit une perturbation trop grande nous retrouvons des valeurs de r qui se rapprochent de celle du Multistart. En effet, lorsque les perturbations sont bien plus grandes que les rayons des cercles, à chaque itération du MBH, tout se passe comme nous mélangions de façon complétement aléatoire tous les cercles, ce qui revient à l'algo Multistart.
 
 ## Comparaison avec l'algorithme Multistart
 
@@ -105,7 +110,7 @@ Nous avons par la suite comparé les résultats obtenus avec l'algorithme MBH à
 Dans un premier temps avec le solveur snopt, vous trouverez ci-dessous les résultats obtenus pour différents n et différents temps d'execution :
 ![GitHub Logo](/images/comparaison_MBH_Multistart_snopt.png)
 
-r ref est la valeur donnée par le site Packomania pour chaque n, elle nous permet de calculer un delta relatif.
+r ref est la valeur donnée par le site Packomania pour chaque n, elle nous permet de calculer le ∆relatif.
 On remarque qu'en majorité, l'algorithme MBH est celui qui, à temps égaux, nous donne un rayon le plus proche de celui maximal.
 
 Nous avons aussi testé avec le solveur knitro et différents n, là encore, c'est plutôt l'algorithme MBH qui donne les meilleurs résultats à temps égaux :
@@ -113,7 +118,7 @@ Nous avons aussi testé avec le solveur knitro et différents n, là encore, c'e
 
 ## Conclusion
 
-Pour conclure, nous avons vu que le problème de la maximisation du rayon de n cercles identiques placés dans le carré unité était un problème mathématique plus complexe à résoudre que ce qu'il en avait l'air. Dans ce rapport, après avoir choisi un placement initial des points plus judicieux qu'un placement purement aléatoire et décidé d'une perturabtion suite à l'analyse d'essais avec MBH et Multistart, nous avons pu comparer les résultats obtenus par ces deux derniers algorithmes. Pour les deux solveurs utilisés et à temps égal, c'est donc l'algorithme MBH qui donne un rayon plus proche du rayon maximal.
+Pour conclure, nous avons vu que le problème de la maximisation du rayon de n cercles identiques placés dans le carré unité était un problème mathématique plus complexe à résoudre que ce qu'il en avait l'air.
 
 Enfin, pour poursuivre sur la résolution de ce problème, sont disponibles dans le répertoire les éléments de codes nécessaires à la résolution de ce problème en 3 dimensions.
 
