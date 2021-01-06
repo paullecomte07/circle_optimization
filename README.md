@@ -4,6 +4,7 @@ L'objectif de ce repository est de proposer une solution pour le problème suiva
 
 **Packing n circles in the unit square with the largest possible radius**
 
+Proposition d'une solution par Paul Lecomte, Noémie Laguelle et Thomas Meier.
 
 ## Définition du problème
 
@@ -69,6 +70,17 @@ Tout d'abord, on constate que la valeur de la perturbation est non négligeable 
 Ensuite, il est rassurant de voir que lorsque l'on choisit une perturbation trop grande nous retrouvons des valeurs de r qui se rapproche de celle du multistart. En effet, lorsque les perturbations sont bien plus grandes que les rayons des cercles, à chaque itération du MBH tout se passe comme nous mélangions de facon complétement aléatoire tous les cercles, ce qui revient au multistart.
 
 ## Comparaison avec l'algorithme Multistart
+
+Nous avons par la suite comparé les résultats obtenus avec l'algorithme MBH à ceux obtenus avec l'algorithme Multistart. 
+
+Dans un premier temps avec le solveur snopt, vous trouverez ci-dessous les résultats obtenus pour différents n et différents temps d'execution :
+![GitHub Logo](/images/comparaison_MBH_Multistart_snopt.png)
+
+r ref est la valeur donnée par le site Packomania pour chaque n, elle nous permet de calculer un delta relatif. 
+On remarque qu'en majorité, l'algorithme MBH est celui qui, à temps égaux, nous donne un rayon le plus proche de celui maximal. 
+
+Nous avons aussi testé avec le solveur knitro et différents n, là encore, c'est plutôt l'algorithme MBH qui donne les meilleurs résultats à temps égaux :
+<br/>![GitHub Logo](/images/comparaison_MBH_Multistart_knitro.png)
 
 ## Conclusion
 
