@@ -43,6 +43,7 @@ print("\n--------------\nLoading... ", tech_time, "s")
 print("MBH ", mbh_time - tech_time, "s")
 
 """
+
 init_values = init_circles_random(n)
 
 # Execution de la méthode d'optimisation Multistart avec mesure du temps d'execution
@@ -51,11 +52,6 @@ FoundSolution = multistart(mymodel, max_iter, init_values , localsolver, labels,
 multistart_time = time.process_time()
 
 print("\n--------------\nLoading... ", tech_time, "s")
-<<<<<<< HEAD
-print("Multistart ", mbh_time - tech_time, "s")
-"""
-=======
 print("Multistart ", multistart_time - tech_time, "s")
 
 """
->>>>>>> 8db51a76a3336bacbfad187ac5eca1334114f546
