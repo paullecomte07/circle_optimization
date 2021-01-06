@@ -35,24 +35,24 @@ Cet algorithme nous donne pour tous les carrées parfaits la configuration où r
 
 Remarque avec ce type d'initialisation :
 
-Il s'avère que partir d'un configuration où les boules ont déjà un rayon assez grand ne permets pas d'améliorer radicalement le temps de calcule. Pire, il semble au vu de nos expérimentations que il soit préférable de partir de cercle de rayon 0. En effet, le problème avec ce placement étant déjà optimisé, il est difficile  de changer de configuration radicalement. C'est possible si l'on commence avec des cercles de rayon très petit)
+  Il s'avère que partir d'un configuration où les boules ont déjà un rayon assez grand ne permets pas d'améliorer radicalement le temps de calcule. Pire, il semble au vu de nos expérimentations que il soit préférable de partir de cercle de rayon 0. En effet, le problème avec ce placement étant déjà optimisé, il est difficile  de changer de configuration radicalement. C'est possible si l'on commence avec des cercles de rayon très petit)
 
 ## Implémentation et utilisation du code
 
 ### Description de la disposition des différents fichiers
 
-**dm_script_2D** contient le script à lancer pour réaliser une optimisation. A la fin, il affichera une représentation à chaque nouvelle optimisation du placement des cercles.
+* **dm_script_2D.py** contient le script à lancer pour réaliser une optimisation. A la fin, il affichera une représentation à chaque nouvelle optimisation du placement des cercles.
 
-**dm_script_3D** contient le script homologue à **dm_script_2D** mais pour le problème en 3D.
+* **dm_script_3D.py** contient le script homologue à **dm_script_2D** mais pour le problème en 3D.
 
-**my_model.py** contient le code qui construit le modèle Pyomo utilisé dans l'optimisation. Il contient le modèle utile pour le problème 2D mais aussi le problème 3D.
+* **my_model.py** contient le code qui construit le modèle Pyomo utilisé dans l'optimisation. Il contient le modèle utile pour le problème 2D mais aussi le problème 3D.
 
-**optimization_functions.py** contient le code des différents algorithmes d'optimisation.
+* **optimization_functions.py** contient le code des différents algorithmes d'optimisation.
 
 
 ### Lancer le programme & résultats attendus
 
-Pour lancer le programme, il vous suffit dans la console d'exécuter dm_script_*.py. A la fin de l'optimisation, vous aurez notamment accès au rayon des cercles et au temps d'exécution du processus. Seront afficher les représentations des points sur un graph à chaque nouvelle optimisation comme illustrées ci-dessous:
+  Pour lancer le programme, il vous suffit dans la console d'exécuter dm_script_*.py. A la fin de l'optimisation, vous aurez notamment accès au rayon des cercles et au temps d'exécution du processus. Seront afficher les représentations des points sur un graph à chaque nouvelle optimisation comme illustrées ci-dessous:
 
 #### En 2D :
 
@@ -107,8 +107,8 @@ Cours de la prof : aller plus loin dans le projet
 
 ## Bibliographie
 
-1 - Addis, B., Locatelli, M., Schoen, F.: Disk packing in a square: a new global optimization approach. INFORMS J. Comput. 20, 516–524 (2008)
+1. Addis, B., Locatelli, M., Schoen, F.: Disk packing in a square: a new global optimization approach. INFORMS J. Comput. 20, 516–524 (2008)
 
-2 - A. Grosso, A. R. M. J. U. Jamali, M. Locatelli, and F. Schoen, “Solving the problem of packing equal and unequal circles in a circular container,” Journal of Global Optimization, vol. 47, no. 1, pp. 63–81, 2010.
+2. A. Grosso, A. R. M. J. U. Jamali, M. Locatelli, and F. Schoen, “Solving the problem of packing equal and unequal circles in a circular container,” Journal of Global Optimization, vol. 47, no. 1, pp. 63–81, 2010.
 
-3 - Brian Olson, Irina Hashmi, Kevin Molloy, Amarda Shehu, "Basin Hopping as a General and Versatile Optimization Framework for the Characterization of Biological Macromolecules", Advances in Artificial Intelligence, vol. 2012, Article ID 674832, 19 pages, 2012. https://doi.org/10.1155/2012/674832
+3. Brian Olson, Irina Hashmi, Kevin Molloy, Amarda Shehu, "Basin Hopping as a General and Versatile Optimization Framework for the Characterization of Biological Macromolecules", Advances in Artificial Intelligence, vol. 2012, Article ID 674832, 19 pages, 2012. https://doi.org/10.1155/2012/674832
