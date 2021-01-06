@@ -60,7 +60,7 @@ def from_pyomo_model_to_class(model, is3D):
     return matrice, model.r.value
 
 def perturbate_points(model, is3D):
-    delta = 0.3
+    delta = 0.4
     for i in range (1,model.n +1) :
         model.x[i] = pe.value(model.x[i]) + random.uniform(-delta, delta)
         model.y[i] = pe.value(model.y[i]) + random.uniform(-delta, delta)
@@ -152,7 +152,5 @@ def multistart(mymodel, iter, init_values, localsolver, labels,
         print(algo_name + " No feasible solution found by local solver")
 
     print(algo_name + " Total number of feasible solutions ", nb_solution)
-
+    plt.show()
     return feasible
-
-

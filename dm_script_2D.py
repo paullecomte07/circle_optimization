@@ -13,7 +13,7 @@ from pyomo.core.base.block import generate_cuid_names
 import time
 
 # Nombre de cercles contenus dans le carré
-n = 5
+n = 44
 
 # Modélisation du problème avec pyomo
 mymodel = CirclePacking(n)
@@ -22,7 +22,7 @@ mymodel = CirclePacking(n)
 max_iter = n*10
 
 # Appel d'un local solver
-localsolver = create_solver('knitro')
+localsolver = create_solver('snopt')
 
 # On génère un premier ensemble de centres et un rayon pour commencer l'optimisation
 #init_values = init_circles(n)
@@ -51,6 +51,11 @@ FoundSolution = multistart(mymodel, max_iter, init_values , localsolver, labels,
 multistart_time = time.process_time()
 
 print("\n--------------\nLoading... ", tech_time, "s")
+<<<<<<< HEAD
+print("Multistart ", mbh_time - tech_time, "s")
+"""
+=======
 print("Multistart ", multistart_time - tech_time, "s")
 
 """
+>>>>>>> 8db51a76a3336bacbfad187ac5eca1334114f546
