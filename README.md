@@ -4,6 +4,7 @@ L'objectif de ce repository est de proposer une solution pour le problème suiva
 
 **Packing n circles in the unit square with the largest possible radius**
 
+Proposition d'une solution par Paul Lecomte, Noémie Laguelle et Thomas Meier.
 
 ## Définition du problème
 
