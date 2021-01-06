@@ -20,17 +20,14 @@ Pour mettre un peu de contexte dans la résolution historique de ces deux probl�
 
 -	Pour les cas de 14 à 20 cercles, les solutions furent trouvées numériquement mais avec un nombre croissant de cercles, il devient de plus en plus difficile de converger vers l'optimum global. Pour un nombre de cercles encore plus grand, il devient même plus probable d’être piégé dans des optima locaux.
 
-## Définition du problème
+### Définition du problème
 
-Soit *n* un nombre naturel, il s'agit de déterminer le rayon *r* maximal de *n* cercles enfermés dans un carré de côté unitaire sans que ces cercles ne se chevauchent. On représentera par (*x<sub>i</sub>*, *y<sub>i</sub>*) les coordonnées du centre du *i*-ème cercle.
-<br/>On peut alors écrire le problème de la manière suivante :
+Soit *n* un nombre naturel donné. Le problème consiste à placer *n* cercles identiques dans le carré unité avec le plus rand rayon possible pour ces cercles, sans que ceux-ci ne se chevauchent ou ne chevauchent les frontières du carré. Il s'agit donc de déterminer le rayon *r* maximal de ces *n* cercles enfermés. On représentera par (*x<sub>i</sub>*, *y<sub>i</sub>*) les coordonnées du centre du *i*-ème cercle. On peut alors écrire le problème de la manière suivante :
 
 ![GitHub Logo](/images/formules_mathematiques.png)
 
+Aussi, le but est ici de proposer une stratégie de résolution de ce problème par MBH : il faut donc choisir et générer une bonne situation de départ, choisir un bon solveur, déterminer les variables à perturber, tester l’algorithme… Le but est également de résoudre ce problème mais dans le cube unité avec *n* sphères identiques.
 
-## Première stratégie
-
-Recherche historique des solutions (articles)
 
 
 ## Placement initial des points
@@ -42,7 +39,7 @@ Pour trouver ainsi un solution quelque soit n, notre démarche est la suivante:
 - On calcule le premier carré parfait supérieur à n.
 - On calcule alors r en sachant qu'il y sqrt(n) boule à placer dans la largeur.
 
-Cet algorithme nous donne pour tous les carrées parfaits la configuration où r est déjà maximal, enfin d'après l'article [14] global opitimization, on constate que on est proche de la taille moyenne des cercles en moyenne lors de l'initialisation  ou r=1.07456993182354/sqrt(n)
+Cet algorithme nous donne pour tous les carrées parfaits la configuration où r est déjà maximal, enfin d'après l'article [1.], on constate que on est proche de la taille moyenne des cercles en moyenne lors de l'initialisation  ou r=1.07456993182354/sqrt(n)
 
 ![](/images/init_circle_7.png)
 ![](/images/init_circle_9.png)
