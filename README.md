@@ -1,4 +1,4 @@
-# circle_optimization
+# Disk packing in a square: global optimization
 
 L'objectif de ce repository est de proposer une solution pour le problème suivant :
 
@@ -30,8 +30,8 @@ Pour trouver ainsi un solution quelque soit n, notre démarche est la suivante:
 
 Cet algorithme nous donne pour tous les carrées parfaits la configuration où r est déjà maximal, enfin d'après l'article [14] global opitimization, on constate que on est proche de la taille moyenne des cercles en moyenne lors de l'initialisation  ou r=1.07456993182354/sqrt(n)
 
-![](/images/init_circles7.png)
-![](/images/init_circles9.png)
+![](/images/init_circle_7.png)
+![](/images/init_circle_9.png)
 
 Remarque avec ce type d'initialisation :
 
@@ -56,7 +56,7 @@ Pour lancer le programme, il vous suffit dans la console d'exécuter dm_script_*
 
 #### En 2D :
 
- ![](/images/step_by_step_optim_MBH)
+ ![](/images/step_by_step_optim_MBH.png)
 
 #### En 3D :
 
